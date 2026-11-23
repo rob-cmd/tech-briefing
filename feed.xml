@@ -4,48 +4,77 @@
   <id>https://github.com/rob-cmd/tech-briefing</id>
   <link href="https://github.com/rob-cmd/tech-briefing"/>
   <link rel="self" href="https://raw.githubusercontent.com/rob-cmd/tech-briefing/main/feed.xml"/>
-  <updated>2026-11-23T12:46:28Z</updated>
+  <updated>2026-11-23T13:09:46Z</updated>
   <author><name>Tech-Briefing</name></author>
   <entry>
     <title>Briefing, 2026-11-23</title>
     <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23.md</id>
     <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23.md"/>
-    <updated>2026-11-23T12:46:28Z</updated>
+    <updated>2026-11-23T13:09:46Z</updated>
     <content type="html"><![CDATA[
-<h2>1. Leverage points in systems</h2>
-<p><strong>Donella Meadows ranks twelve places to intervene in a system and argues that the obvious ones (numbers, subsidies, taxes) are the weakest, while shared mindsets sit near the top.</strong></p>
-<p>Field: Thinking · Surfaced in: <a href="https://news.ycombinator.com/">Hacker News search results on systems thinking (no single thread)</a> · Source (essay): <a href="https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/">Meadows, 1999, Leverage Points: Places to Intervene in a System</a></p>
-<p>Criteria:</p>
+<h1>Briefing, 2026-11-23</h1>
 <ul>
-<li>&quot;Leverage points are points of power.&quot; (intro)</li>
-<li>&quot;Counterintuitive. That&#x27;s Forrester&#x27;s word to describe complex systems.&quot; (intro)</li>
-<li>&quot;Constants, parameters, numbers (such as subsidies, taxes, standards).&quot; (Places to intervene, item 12 (lowest))</li>
-<li>&quot;The mindset or paradigm out of which the system — its goals, structure, rules, delays, parameters — arises.&quot; (Places to intervene, item 2)</li>
-<li>&quot;The structure of information flows (who does and does not have access to information).&quot; (Places to intervene, item 6)</li>
+<li>Chesterton's fence (thinking)</li>
+<li>Clinger's fast path (software)</li>
+<li>Weight-space programming (AI)</li>
 </ul>
-<p>Related: Stocks and flows, Forrester's system dynamics<br/>Topic: <code>leverage-points-meadows</code></p>
-<h2>2. CRDT (conflict-free replicated data type)</h2>
-<p><strong>A data structure that many devices can edit offline and concurrently, and that merges automatically so all copies end up identical without a central server deciding.</strong></p>
-<p>Field: Software · Surfaced in: <a href="https://news.ycombinator.com/item?id=37584049">Hacker News threads on CRDTs and local-first software</a> · Source (paper): <a href="https://arxiv.org/abs/1608.03960">Kleppmann &amp; Beresford, 2017, A Conflict-Free Replicated JSON Datatype</a></p>
-<p>Criteria:</p>
+<hr/>
+<h2>Chesterton's fence</h2>
+<p><em>Before you remove a rule or structure, find out why someone built it.</em></p>
+<h3>What it is</h3>
+<p>A principle about change. You find a fence across a road and see no use for it. Chesterton says: do not tear it down until you know why it was put up. A team that drops an odd approval step, without asking why it exists, may bring back the exact problem the step solved.</p>
+<h3>Where it comes from</h3>
+<p>G. K. Chesterton, an English essayist, wrote it in "The Thing" (1929). He was arguing about reformers who attack institutions they do not understand. The name "Chesterton's fence" came later, from commentators.</p>
+<h3>Why it came up</h3>
+<p>Farnam Street's article retells the parable and applies it to companies, laws and habits. It stresses that the rule is not a defence of the status quo. It asks for understanding first and reform second.</p>
+<h3>Key ideas</h3>
 <ul>
-<li>&quot;All replicas of the data structure should automatically converge towards the same state (a requirement known as strong eventual consistency [3]).&quot; (section 1, design goals)</li>
-<li>&quot;No user input should be lost due to concurrent modifications.&quot; (section 1, design goals)</li>
-<li>&quot;If all sequential permutations of a set of updates lead to the same state, then concurrent execution of those updates also leads to the same state [4].&quot; (section 1, design goals)</li>
-<li>&quot;The algorithm performs all merging client-side and does not depend on ordering guarantees from the network&quot; (Abstract)</li>
+<li>Not seeing the purpose of a thing is not proof it has none.</li>
+<li>The test is a question: who built this, and what problem did they face?</li>
+<li>After you know the reason, you may still remove the fence.</li>
+<li>Misused, the rule becomes an excuse to never change anything.</li>
 </ul>
-<p>Related: Strong eventual consistency, local-first software<br/>Topic: <code>crdt</code></p>
-<h2>3. Constitutional AI</h2>
-<p><strong>Instead of humans labelling harmful outputs, a model critiques and revises its own answers against a written list of principles, and AI preference judgments replace human ones in reinforcement learning.</strong></p>
-<p>Field: AI · Surfaced in: <a href="https://news.ycombinator.com/">Hacker News search results on AI alignment methods</a> · Source (paper): <a href="https://arxiv.org/abs/2212.08073">Bai et al., 2022, Constitutional AI: Harmlessness from AI Feedback</a></p>
-<p>Criteria:</p>
+<p><strong>Source:</strong> <a href="https://gist.github.com/austintaylor/90c9b867ca949d7ffb748549a76422bb">Chesterton (1929), The Thing, ch. IV "The Drift from Domesticity" (text copy)</a>, book</p>
+<p><strong>Surfaced in:</strong> <a href="https://fs.blog/chestertons-fence/">Farnam Street, Chesterton's Fence</a></p>
+<p><strong>Related:</strong> Second-order thinking, Lindy effect</p>
+<hr/>
+<h2>Clinger's fast path</h2>
+<p><em>A shortcut for turning decimal text into a float that is provably still exact.</em></p>
+<h3>What it is</h3>
+<p>Computers store decimals like 0.1 as binary floating-point, so reading "12.34" means finding the nearest binary value. The fast path covers easy cases. If the digits form an integer small enough to be exact (up to 2^53) and the power of ten is small (up to 10^22), one multiplication or division gives the correctly rounded answer. Only harder inputs need slow big-integer arithmetic.</p>
+<h3>Where it comes from</h3>
+<p>William Clinger published it in 1990 at PLDI, in "How to Read Floating Point Numbers Accurately". Before it, many systems rounded wrongly when parsing. His observation was that rounding twice can differ from rounding once, which is the core difficulty.</p>
+<h3>Why it came up</h3>
+<p>Simon Willison compared C and Rust SQLite extensions that parse numbers. The first C version, using strtod, was slower on decimals. He asked Claude to write a faster parser, and it used Clinger's fast path. His post reports about 18 ns per decimal row, against 32 to 55 ns for the Rust versions.</p>
+<h3>Key ideas</h3>
 <ul>
-<li>&quot;As AI systems become more capable, we would like to enlist their help to supervise other AIs.&quot; (Abstract)</li>
-<li>&quot;The only human oversight is provided through a list of rules or principles&quot; (Abstract)</li>
-<li>&quot;In the supervised phase we sample from an initial model, then generate self-critiques and revisions, and then finetune the original model on revised responses.&quot; (Abstract)</li>
-<li>&quot;we use ‘RL from AI Feedback’ (RLAIF)&quot; (Abstract)</li>
+<li>Two roundings can give a different result than one rounding.</li>
+<li>Most real-world numbers are short, so the exact cheap case is common.</li>
+<li>When the cheap case fails, fall back to a slower correct method.</li>
+<li>Correct reading was later made much faster by successors, but this idea persists.</li>
 </ul>
-<p>Related: RLHF, preference models<br/>Topic: <code>constitutional-ai</code></p>
+<p><strong>Source:</strong> <a href="https://doi.org/10.1145/93548.93557">Clinger (1990), How to Read Floating Point Numbers Accurately, PLDI</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://simonwillison.net/2026/Nov/8/sqlite-parse-number-c-vs-rust/">Simon Willison, parse_number() as a SQLite extension: C vs Rust</a></p>
+<p><strong>Related:</strong> IEEE 754, Eisel-Lemire algorithm</p>
+<hr/>
+<h2>Weight-space programming</h2>
+<p><em>Treating a neural network's raw weights as code an LLM can read and edit.</em></p>
+<h3>What it is</h3>
+<p>Normally an optimizer sets a network's weights. Here a general LLM reads the numbers directly and says what the network does. In one test it told which of four games a policy had been trained on. It can also edit weights. For a failing driving policy it changed 3.5% of the weights and reached 100% success.</p>
+<h3>Where it comes from</h3>
+<p>Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab (MIT CSAIL) coined the term in a paper dated 2 November 2026. They asked whether an LLM can reason about weights as a programmer reasons about source code, with no training loop.</p>
+<h3>Why it came up</h3>
+<p>Willison reran one of the paper's prompts on a local Qwen 3.8 27B model. It named Pac-Man, Pong and Breakout with 72% to 88% stated confidence but missed Freeway. He thinks the wider commentary goes too far.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Weights are a program, and an LLM can be the reader and writer.</li>
+<li>Editing removed obstacles that hid abilities, but did not add missing ones.</li>
+<li>The authors call it early evidence of a capability, not a validated method.</li>
+<li>Some tasks still needed tools, such as inspecting attention patterns.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://rikiyat.github.io/blog/weight-space-programming/">Takehi et al. (2026), Sparks of Weight-Space Programming</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/">Simon Willison, Qwen 3.8 27B on my laptop can interpret model weights, too</a></p>
+<p><strong>Related:</strong> Mechanistic interpretability, Model editing</p>
 ]]></content>
   </entry>
 </feed>
