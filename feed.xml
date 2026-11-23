@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tech-Briefing</title>
+  <id>https://github.com/rob-cmd/tech-briefing</id>
+  <link href="https://github.com/rob-cmd/tech-briefing"/>
+  <link rel="self" href="https://raw.githubusercontent.com/rob-cmd/tech-briefing/main/feed.xml"/>
+  <updated>2026-11-23T12:31:14Z</updated>
+  <author><name>Tech-Briefing</name></author>
+  <entry>
+    <title>Briefing, 2026-11-23 (test)</title>
+    <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23-test.md</id>
+    <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23-test.md"/>
+    <updated>2026-11-23T12:31:14Z</updated>
+    <content type="html"><![CDATA[
+<h2>1. Satisficing</h2>
+<p><strong>Deciding by "good enough" instead of the optimum.</strong></p>
+<p>Field: Thinking · Surfaced in: test · Source: Simon, H. A. (1956)</p>
+<p>Criteria:</p>
+<ul>
+<li>test criterion one</li>
+<li>test criterion two</li>
+</ul>
+<p>Related: <a href="https://github.com/rob-cmd/tech-briefing/blob/main/README.md">README</a></p>
+]]></content>
+  </entry>
+</feed>
