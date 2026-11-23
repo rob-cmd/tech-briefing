@@ -4,23 +4,48 @@
   <id>https://github.com/rob-cmd/tech-briefing</id>
   <link href="https://github.com/rob-cmd/tech-briefing"/>
   <link rel="self" href="https://raw.githubusercontent.com/rob-cmd/tech-briefing/main/feed.xml"/>
-  <updated>2026-11-23T12:31:14Z</updated>
+  <updated>2026-11-23T12:46:28Z</updated>
   <author><name>Tech-Briefing</name></author>
   <entry>
-    <title>Briefing, 2026-11-23 (test)</title>
-    <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23-test.md</id>
-    <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23-test.md"/>
-    <updated>2026-11-23T12:31:14Z</updated>
+    <title>Briefing, 2026-11-23</title>
+    <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23.md</id>
+    <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-23.md"/>
+    <updated>2026-11-23T12:46:28Z</updated>
     <content type="html"><![CDATA[
-<h2>1. Satisficing</h2>
-<p><strong>Deciding by "good enough" instead of the optimum.</strong></p>
-<p>Field: Thinking · Surfaced in: test · Source: Simon, H. A. (1956)</p>
+<h2>1. Leverage points in systems</h2>
+<p><strong>Donella Meadows ranks twelve places to intervene in a system and argues that the obvious ones (numbers, subsidies, taxes) are the weakest, while shared mindsets sit near the top.</strong></p>
+<p>Field: Thinking · Surfaced in: <a href="https://news.ycombinator.com/">Hacker News search results on systems thinking (no single thread)</a> · Source (essay): <a href="https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/">Meadows, 1999, Leverage Points: Places to Intervene in a System</a></p>
 <p>Criteria:</p>
 <ul>
-<li>test criterion one</li>
-<li>test criterion two</li>
+<li>&quot;Leverage points are points of power.&quot; (intro)</li>
+<li>&quot;Counterintuitive. That&#x27;s Forrester&#x27;s word to describe complex systems.&quot; (intro)</li>
+<li>&quot;Constants, parameters, numbers (such as subsidies, taxes, standards).&quot; (Places to intervene, item 12 (lowest))</li>
+<li>&quot;The mindset or paradigm out of which the system — its goals, structure, rules, delays, parameters — arises.&quot; (Places to intervene, item 2)</li>
+<li>&quot;The structure of information flows (who does and does not have access to information).&quot; (Places to intervene, item 6)</li>
 </ul>
-<p>Related: <a href="https://github.com/rob-cmd/tech-briefing/blob/main/README.md">README</a></p>
+<p>Related: Stocks and flows, Forrester's system dynamics<br/>Topic: <code>leverage-points-meadows</code></p>
+<h2>2. CRDT (conflict-free replicated data type)</h2>
+<p><strong>A data structure that many devices can edit offline and concurrently, and that merges automatically so all copies end up identical without a central server deciding.</strong></p>
+<p>Field: Software · Surfaced in: <a href="https://news.ycombinator.com/item?id=37584049">Hacker News threads on CRDTs and local-first software</a> · Source (paper): <a href="https://arxiv.org/abs/1608.03960">Kleppmann &amp; Beresford, 2017, A Conflict-Free Replicated JSON Datatype</a></p>
+<p>Criteria:</p>
+<ul>
+<li>&quot;All replicas of the data structure should automatically converge towards the same state (a requirement known as strong eventual consistency [3]).&quot; (section 1, design goals)</li>
+<li>&quot;No user input should be lost due to concurrent modifications.&quot; (section 1, design goals)</li>
+<li>&quot;If all sequential permutations of a set of updates lead to the same state, then concurrent execution of those updates also leads to the same state [4].&quot; (section 1, design goals)</li>
+<li>&quot;The algorithm performs all merging client-side and does not depend on ordering guarantees from the network&quot; (Abstract)</li>
+</ul>
+<p>Related: Strong eventual consistency, local-first software<br/>Topic: <code>crdt</code></p>
+<h2>3. Constitutional AI</h2>
+<p><strong>Instead of humans labelling harmful outputs, a model critiques and revises its own answers against a written list of principles, and AI preference judgments replace human ones in reinforcement learning.</strong></p>
+<p>Field: AI · Surfaced in: <a href="https://news.ycombinator.com/">Hacker News search results on AI alignment methods</a> · Source (paper): <a href="https://arxiv.org/abs/2212.08073">Bai et al., 2022, Constitutional AI: Harmlessness from AI Feedback</a></p>
+<p>Criteria:</p>
+<ul>
+<li>&quot;As AI systems become more capable, we would like to enlist their help to supervise other AIs.&quot; (Abstract)</li>
+<li>&quot;The only human oversight is provided through a list of rules or principles&quot; (Abstract)</li>
+<li>&quot;In the supervised phase we sample from an initial model, then generate self-critiques and revisions, and then finetune the original model on revised responses.&quot; (Abstract)</li>
+<li>&quot;we use ‘RL from AI Feedback’ (RLAIF)&quot; (Abstract)</li>
+</ul>
+<p>Related: RLHF, preference models<br/>Topic: <code>constitutional-ai</code></p>
 ]]></content>
   </entry>
 </feed>
