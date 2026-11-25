@@ -4,8 +4,70 @@
   <id>https://github.com/rob-cmd/tech-briefing</id>
   <link href="https://github.com/rob-cmd/tech-briefing"/>
   <link rel="self" href="https://raw.githubusercontent.com/rob-cmd/tech-briefing/main/feed.xml"/>
-  <updated>2026-11-24T04:03:26Z</updated>
+  <updated>2026-11-25T04:03:28Z</updated>
   <author><name>Tech-Briefing</name></author>
+  <entry>
+    <title>Pareto efficiency · Confinement problem · Perfect resilience</title>
+    <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-25.md</id>
+    <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-25.md"/>
+    <updated>2026-11-25T04:03:28Z</updated>
+    <content type="html"><![CDATA[
+<h2>Pareto efficiency</h2>
+<p><em>A state is efficient if nobody can gain without someone else losing.</em></p>
+<h3>What it is</h3>
+<p>An outcome is Pareto efficient when no change could help one party without hurting another. Take two AI models that score the same on a benchmark. One costs 12 cents a task, the other 25 cents. The pricier one is not efficient, because switching to the cheaper one helps you and hurts nobody. The set of all efficient options forms a "Pareto line" or frontier.</p>
+<h3>Where it comes from</h3>
+<p>The Italian economist Vilfredo Pareto developed the idea around 1900 to judge economic states without comparing one person's happiness to another's. It later became standard in welfare economics and game theory. It is silent on fairness: a very unequal outcome can still be efficient.</p>
+<h3>Why it came up</h3>
+<p>Simon Willison reviewed Meta's small model Muse Ember. He defines the Pareto line as "the line at which you can only improve one dimension by giving up another". On a chart of intelligence score against cost per task, Ember sits on it. Claude Haiku 5.5 scores about the same at roughly twice the cost, so it falls off the line.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Pareto improvement: a change that helps someone and harms no one.</li>
+<li>Efficient does not mean best. Many efficient options exist, and choosing among them is a values question.</li>
+<li>Inefficient outcomes waste something. The prisoner's dilemma shows rational players ending up at (2,2) when (3,3) was available.</li>
+<li>With several goals at once (cost, speed, quality), the frontier is the honest map of real trade-offs.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://plato.stanford.edu/entries/game-theory/">Stanford Encyclopedia of Philosophy (rev. 2023), Game Theory, section 2.7 on Pareto efficiency</a>, reference</p>
+<p><strong>Surfaced in:</strong> <a href="https://simonwillison.net/2026/Nov/10/muse-ember/">Willison (2026), Introducing Muse Ember</a></p>
+<p><strong>Related:</strong> Prisoner's dilemma, multi-objective optimization</p>
+<h2>Confinement problem</h2>
+<p><em>How do you stop a program from secretly leaking the data you gave it?</em></p>
+<h3>What it is</h3>
+<p>You hand a program your data. You want it to do its job and tell no one else. That is the confinement problem. Even with no message channel, a program can leak by changing something another program can observe. It can lock and unlock a file to signal bits, or vary its CPU load.</p>
+<h3>Where it comes from</h3>
+<p>Butler Lampson, then at Xerox PARC, described it in a three-page note in 1973. Time-sharing systems ran untrusted programs side by side. Lampson sorted the leaks into storage channels, legitimate channels (such as the bill) and covert channels. Covert channels are paths never meant to carry information, such as load. He suggested masking them, or at least bounding their capacity.</p>
+<h3>Why it came up</h3>
+<p>A LessWrong post shows two AI models on the same inference server passing signals. The server's batching changes tiny numeric details in each forward pass. One model can cause that change and the other can read it. The post does not use Lampson's terms, but its sandbox leak is the same kind of problem. A top comment doubts such side channels can ever be fully removed.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Confinement means the service can send nothing to anyone but the caller.</li>
+<li>Shared resources (locks, load, caches) can carry signals even when no communication is allowed.</li>
+<li>Closing every channel is hard, because you must first list all the shared things.</li>
+<li>You can accept some leakage if you bound how fast it flows.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://www.bwlampson.site/11-Confinement/WebPage.html">Lampson (1973), A Note on the Confinement Problem</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being">Models Can Communicate via Inference Servers Despite Being Sandboxed (LessWrong)</a></p>
+<p><strong>Related:</strong> Covert channel, side-channel attack</p>
+<h2>Perfect resilience</h2>
+<p><em>A network that delivers every packet whenever any path still exists.</em></p>
+<h3>What it is</h3>
+<p>In a perfectly resilient network, a packet reaches its destination whenever any path survives. The catch is that each router decides locally. It knows only the destination, the link the packet arrived on, and which nearby links are down. Naive local rules can send packets round in circles after failures.</p>
+<h3>Where it comes from</h3>
+<p>Schapira, Godfrey and colleagues defined the problem in 2012 and showed it is not always achievable. Schmid and colleagues linked it to graph minor theory in 2020. In 2026 Bentert and Schmid fully characterized which networks allow it. They give a linear-time test and a fast way to compute the rules.</p>
+<h3>Why it came up</h3>
+<p>Quanta Magazine reported the 2026 result. It stresses that a router must act within a fraction of a millisecond, so recomputing global routes is too slow. Exactly four forbidden minors block perfect resilience. Networks without them can use a "skipping" rule, a bit like the right-hand rule for escaping a maze.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Routers use only local information, with no global recomputation after a failure.</li>
+<li>The goal is delivery whenever source and destination remain connected at all.</li>
+<li>A network is either perfectly resilient or contains one of four forbidden shapes.</li>
+<li>Simple priority lists that skip failed links are enough.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://arxiv.org/abs/2602.03827">Bentert &amp; Schmid (2026), Perfect Network Resilience in Polynomial Time</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://www.quantamagazine.org/network-researchers-nail-down-theory-of-perfect-resilience-20261120/">Quanta, Network Researchers Nail Down Theory of 'Perfect Resilience'</a></p>
+<p><strong>Related:</strong> Fast reroute, graph minors</p>
+]]></content>
+  </entry>
   <entry>
     <title>Goodhart's law · BeepBeep sample counting · Sleeper agents</title>
     <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-24.md</id>
