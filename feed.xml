@@ -4,8 +4,72 @@
   <id>https://github.com/rob-cmd/tech-briefing</id>
   <link href="https://github.com/rob-cmd/tech-briefing"/>
   <link rel="self" href="https://raw.githubusercontent.com/rob-cmd/tech-briefing/main/feed.xml"/>
-  <updated>2026-11-26T04:04:04Z</updated>
+  <updated>2026-11-27T04:03:05Z</updated>
   <author><name>Tech-Briefing</name></author>
+  <entry>
+    <title>Satisficing · Hybrid logical clock · Speculative decoding</title>
+    <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-27.md</id>
+    <link href="https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-27.md"/>
+    <updated>2026-11-27T04:03:05Z</updated>
+    <content type="html"><![CDATA[
+<h2>Satisficing</h2>
+<p><em>Stop searching at the first option that is good enough.</em></p>
+<h3>What it is</h3>
+<p>Satisficing is a way to choose: set a minimum standard, then take the first option that meets it. You do not compare everything. When you pick the first parking spot close enough to the door, you are satisficing. The standard is called the aspiration level.</p>
+<h3>Where it comes from</h3>
+<p>Herbert Simon proposed it in the mid-1950s, as part of his work on bounded rationality. Classical economics assumed people maximize utility, which needs more information and computing than any person has. Simon replaced "find the best" with "find one that is enough". The word blends "satisfy" and "suffice".</p>
+<h3>Why it came up</h3>
+<p>Shahram Heshmat describes maximizers, who survey every option, and satisficers, who accept a good-enough one. In a study he cites, maximizing graduates took jobs paying about 20% more, but were less satisfied with them. The post links this to regret and to the pain of too many choices.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Search stops when an option clears the threshold, not when the best is found.</li>
+<li>The threshold can move: if nothing clears it, it drops; if everything does, it rises (Selten's aspiration adaptation).</li>
+<li>Simon first framed it as a limit of human minds. Later work sees it as a sensible rule.</li>
+<li>It also fits machines: accept any model that meets set accuracy, speed and error limits.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://plato.stanford.edu/entries/bounded-rationality/">Stanford Encyclopedia of Philosophy, Bounded Rationality (section on satisficing)</a>, reference</p>
+<p><strong>Surfaced in:</strong> <a href="https://www.psychologytoday.com/au/blog/science-choice/201506/satisficing-vs-maximizing">Heshmat, Satisficing vs. Maximizing (Psychology Today, 2015)</a></p>
+<p><strong>Related:</strong> Bounded rationality, Aspiration level</p>
+<hr/>
+<h2>Hybrid logical clock</h2>
+<p><em>A timestamp that mixes wall-clock time with a small counter to order events.</em></p>
+<h3>What it is</h3>
+<p>Computers in a cluster disagree about the time, so wall-clock stamps can order events wrongly. A hybrid logical clock stamp has two parts: a time value close to real time, and a tiny counter. If two events share the same time value, the counter breaks the tie. If server A sends a message at (100, 0), server B must stamp its reply later than that, say (100, 1), even if B's own clock reads 98.</p>
+<h3>Where it comes from</h3>
+<p>Sandeep Kulkarni, Murat Demirbas and colleagues proposed it in 2014. Lamport's logical clocks (1978) track cause and effect but ignore real time. NTP clocks follow real time but are too imprecise to order close events. The new clock keeps both properties, and fits in a 64-bit NTP timestamp.</p>
+<h3>Why it came up</h3>
+<p>Unmesh Joshi's pattern page explains the same idea for version numbers in a database. A plain counter says nothing about when a version was written. A stamp of wall-clock time plus ticks stays ordered and can still be queried by date.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Each stamp is (l, c): l follows the largest time seen so far, c counts ties.</li>
+<li>On receiving a message, take the max of local time, own l and the sender's l, then adjust c.</li>
+<li>If A happened before B, A's stamp is smaller than B's. This is the causality guarantee of Lamport clocks.</li>
+<li>The stamp stays close to physical time, so you can ask what the database looked like at a given moment.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://www.cse.buffalo.edu/tech-reports/2014-04.pdf">Kulkarni et al. (2014), Logical Physical Clocks and Consistent Snapshots in Globally Distributed Databases</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://martinfowler.com/articles/patterns-of-distributed-systems/hybrid-clock.html">Joshi, Hybrid Clock (Patterns of Distributed Systems, 2023)</a></p>
+<p><strong>Related:</strong> Lamport clock, Vector clock</p>
+<hr/>
+<h2>Speculative decoding</h2>
+<p><em>A small model drafts several words; the big model checks them all at once.</em></p>
+<h3>What it is</h3>
+<p>A large language model writes one token at a time, and each step is slow. Speculative decoding lets a small, fast model guess the next few tokens. The large model then checks all guesses in a single pass and keeps the correct prefix. If the small model guesses "the cat sat on" and the large one agrees with the first three words, three tokens arrive for the cost of one big step.</p>
+<h3>Where it comes from</h3>
+<p>Yaniv Leviathan, Matan Kalman and Yossi Matias at Google published it in late 2022 (ICML 2023). Generating K tokens normally needs K sequential runs of the big model. Their trick is a sampling rule that keeps the output distribution identical to the big model's. They report a 2x to 3x speedup on T5-XXL with identical outputs.</p>
+<h3>Why it came up</h3>
+<p>A 2024 study ran over 350 experiments with LLaMA-65B and OPT-66B. It found that the draft model's speed matters most. How good the draft is at language correlates weakly with the speedup. The authors designed draft models built for hardware speed, with up to 111% higher throughput.</p>
+<h3>Key ideas</h3>
+<ul>
+<li>Many tokens are easy to predict, so a cheap model can draft them.</li>
+<li>Checking tokens in parallel costs about the same as producing one, because the cost is loading weights.</li>
+<li>A rejection rule makes it lossless: the result is the same as running the big model alone.</li>
+<li>Speedup depends on how often drafts are accepted and how cheap the draft is.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://arxiv.org/abs/2211.17192">Leviathan, Kalman, Matias (2022), Fast Inference from Transformers via Speculative Decoding</a>, paper</p>
+<p><strong>Surfaced in:</strong> <a href="https://arxiv.org/abs/2402.01528">Yan, Agarwal, Venkataraman, Decoding Speculative Decoding (arXiv 2024)</a></p>
+<p><strong>Related:</strong> KV cache, Autoregressive decoding</p>
+]]></content>
+  </entry>
   <entry>
     <title>Context of discovery vs. context of justification · Linear scan register allocation · VP vs. VNP</title>
     <id>https://github.com/rob-cmd/tech-briefing/blob/main/ausgaben/2026-11-26.md</id>
